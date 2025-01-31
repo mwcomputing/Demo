@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Classical Encryption</title>
+    <link rel="stylesheet" href="./bootstrap.min.css" />
+    <link rel="stylesheet" href="classicalciphers.css" />
+    <style>
+      #output,
+      #output-sm {
+        height: 100%;
+        background-image: url(./bkgd/2a552daa2d6ddf1e992e3e014af1ca0f.jpg);
+        overflow-y: scroll;
+      }
+      #inner-input {
+        height: 100%;
+        background-image: url(./bkgd/2a552daa2d6ddf1e992e3e014af1ca0f.jpg);
+      }
+      #text-area {
+        background: none;
+        border: none;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Dropdown
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button class="btn btn-outline-success" type="submit">
+                Search
+              </button>
+            </form>
+          </div>
+        </div>
+      </nav>
+      <!-- <div class="container-fluid">
+        <div class="row bg-success p-3">
+          <div class="col">
+            <h1 class="text-center">Classical Encryption</h1>
+          </div>
+        </div>
+      </div> -->
+    </header>
+
+    <div class="container-fluid">
+      <div
+        class="row bg-dark border-bottom border-black justify-content-center"
+      >
+        <!-- Parameters -->
+        <div
+          class="col-md-2 py-2 py-md-5 bg-dark border-end border-black shadow text-white"
+        >
+          <div class="row">
+            <div class="col-6 col-md-12">
+              <label for="cipher" class="form-label"> Cipher </label>
+              <select id="cipher" class="form-control" onchange="put_key()">
+                <option value="vigenere">Vigenere</option>
+                <option value="caeser">Caeser</option>
+                <option value="play-fair">Play Fair</option>
+                <option value="hill">Hill</option>
+              </select>
+            </div>
+            <div id="key" class="col-6 col-md-12 py-md-2">
+              <label for="key-input" class="form-label">Key</label>
+              <input type="text" id="key-input" class="form-control" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Input -->
+        <div class="col-11 col-md-5" id="input">
+          <div id="inner-input" class="row justify-content-center py-2 py-md-0">
+            <!-- Buttons for large screen-->
+            <div class="d-none d-md-flex col-12 py-2 gap-2" style="height: 10%">
+              <button
+                type="button"
+                class="btn btn-dark d-block"
+                style="width: 50%"
+                onclick="encrypt()"
+              >
+                Encrypt
+              </button>
+              <button
+                type="button"
+                class="btn btn-dark d-block"
+                style="width: 50%"
+                onclick="decrypt()"
+              >
+                Decrypt
+              </button>
+            </div>
+            <!-- Input area -->
+            <div class="col-1 d-md-none" style="height: 250px"></div>
+            <div class="col-10 col-md-12" style="height: 85%">
+              <textarea
+                type="text"
+                id="text-area"
+                class="form-control border border-black fw-bold"
+                placeholder="Enter the input here"
+              ></textarea>
+            </div>
+            <div class="col-1 d-md-none" style="height: 250px"></div>
+            <!-- Buttons for small screen -->
+            <div class="d-flex d-md-none col-12 gap-2">
+              <button
+                type="button"
+                class="btn btn-dark d-block"
+                style="width: 100%"
+                onclick="encrypt()"
+              >
+                Encrypt
+              </button>
+              <button
+                type="button"
+                class="btn btn-dark d-block"
+                style="width: 100%"
+                onclick="decrypt()"
+              >
+                Decrypt
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Output -->
+        <div class="col-12 col-md-5">
+          <div
+            id="output"
+            class="row justify-content-center d-none d-md-flex ms-4 p-2 fw-bold"
+            style="
+              height: 600px;
+              overflow-y: scroll;
+              word-break: break-all;
+              overflow-wrap: break-word;
+            "
+          >
+            The output will be shown here
+          </div>
+          <div
+            id="output-sm"
+            class="row justify-content-center d-md-none p-2 border-top border-black"
+            style="
+              height: 300px;
+              word-break: break-all;
+              overflow-wrap: break-word;
+            "
+          >
+            The output will be shown here
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      var matrix_size = 3;
+      function put_key() {
+        const cipher = document.getElementById("cipher");
+        const key = document.getElementById("key");
+        switch (cipher.value) {
+          case "caeser":
+            var key_input =
+              '<label for="key-input" class="form-label">Key</label>';
+            key_input +=
+              '<select id="key-input" class="form-control" style="width:60px">';
+            for (pki = 1; pki < 26; pki++) {
+              key_input += '<option value="' + pki + '">' + pki + "</option>";
+            }
+            key_input += "</select>";
+            key.innerHTML = key_input;
+            break;
+          case "hill":
+            var key_input = '<div class="input-group">';
+            key_input += '<span class="input-group-text">Size</span>';
+            key_input += '<input type="number" id="size" class="form-control">';
+            key_input +=
+              '<button type="button" class"btn input-group-text" onclick="put_matrix()">submit</button></div>';
+            key_input +=
+              '<div id="matrix" style="overflow-x:scroll;overflow-y:scroll;height:155px">';
+            for (row = 0; row < 3; row++) {
+              key_input += '<div class="d-flex">';
+              for (column = 0; column < 3; column++) {
+                key_input +=
+                  '<input type="number" class="m-1" style="width:52px" id="item' +
+                  row +
+                  column +
+                  '">';
+              }
+              key_input += "</div>";
+            }
+            key_input += "</div>";
+            key.innerHTML = key_input;
+            break;
+          default:
+            key.innerHTML =
+              '<label for="key-input" class="form-label">Key</label><input type="text" id="key-input" class="form-control">';
+        }
+      }
+
+      function put_matrix() {
+        const matrix_field = document.getElementById("matrix");
+        matrix_size = document.getElementById("size").value;
+        var key_input = "";
+        for (row = 0; row < matrix_size; row++) {
+          key_input += '<div class="d-flex">';
+          for (column = 0; column < matrix_size; column++) {
+            key_input +=
+              '<input type="number" class="m-1" style="width:52px" id="item' +
+              row +
+              column +
+              '">';
+          }
+          key_input += "</div>";
+        }
+        matrix_field.innerHTML = key_input;
+      }
+      const output = document.getElementById("output");
+      const output_sm = document.getElementById("output-sm");
+
+      function encrypt() {
+        var key = document.getElementById("key-input");
+        const input = document.getElementById("text-area");
+
+        switch (cipher.value) {
+          case "caeser":
+            var ciptxt = caeser_encrypt(input.value, Number(key.value));
+            break;
+          case "vigenere":
+            key = vigenere_makeKey(key.value);
+            if (key) {
+              var ciptxt = vigenere_encrypt(input.value, key);
+            } else {
+              var ciptxt = "Please provide a valid key";
+            }
+            break;
+          case "play-fair":
+            key = playFair_makeKey(key.value);
+            var ciptxt = playFair_encrypt(input.value, key);
+            break;
+          default:
+            var element;
+            var lst = [];
+            for (row = 0; row < matrix_size; row++) {
+              lst.push([]);
+              for (column = 0; column < matrix_size; column++) {
+                element = document.getElementById("item" + row + column);
+                if (!element.value) {
+                  output.innerHTML = "Incomplete key";
+                  output_sm.innerHTML = "Incomplete key";
+                  return;
+                }
+                lst[row].push(element.value);
+              }
+            }
+            key = new Matrix(lst);
+            key.find_determinant();
+            if (gcd(key.determinant.mod(26).value, 26) != 1 && !ignore) {
+              var ciptxt =
+                '<div class="col-10 bg-light mt-5 rounded" style="height:200px">';
+              ciptxt += '<div class="row justify-content-center py-5">';
+              ciptxt +=
+                '<h6 class="col-12 text-danger text-center">This key can not be used for decryption</h6>';
+              ciptxt +=
+                '<p class="col-12 text-center">Do you wish to continue?</p>';
+              ciptxt +=
+                '<div class="col-4"><button type="button" class="btn btn-dark" style="width:100%" onclick="yes()">Yes</button></div>';
+              ciptxt +=
+                '<div class="col-4"><button type="button" class="btn btn-dark" style="width:100%" onclick="no()">No</button>';
+              ciptxt += "</div></div></div>";
+            } else {
+              if (reply) var ciptxt = hill_encrypt(input.value, key);
+              else var ciptxt = "The output will be shown here";
+            }
+        }
+        output.innerHTML = ciptxt;
+        output_sm.innerHTML = ciptxt;
+      }
+      var reply = true;
+      var ignore = false;
+      function yes() {
+        ignore = true;
+        encrypt();
+        ignore = false;
+      }
+      function no() {
+        reply = false;
+        ignore = true;
+        encrypt();
+        ignore = false;
+        reply = true;
+      }
+
+      function decrypt() {
+        var key = document.getElementById("key-input");
+        const input = document.getElementById("text-area");
+        switch (cipher.value) {
+          case "caeser":
+            var plntxt = caeser_decrypt(input.value, Number(key.value));
+            break;
+          case "vigenere":
+            key = vigenere_makeKey(key.value);
+            if (key) {
+              var plntxt = vigenere_decrypt(input.value, key);
+            } else {
+              var plntxt = "Please provide a valid key";
+            }
+            break;
+          case "play-fair":
+            key = playFair_makeKey(key.value);
+            var plntxt = playFair_decrypt(input.value, key);
+            break;
+          default:
+            var element;
+            var lst = [];
+            for (row = 0; row < matrix_size; row++) {
+              lst.push([]);
+              for (column = 0; column < matrix_size; column++) {
+                element = document.getElementById("item" + row + column);
+                if (!element.value) {
+                  output.innerHTML = "Incomplete key";
+                  output_sm.innerHTML = "Incomplete key";
+                  return;
+                }
+                lst[row].push(element.value);
+              }
+            }
+            key = new Matrix(lst);
+            key.find_determinant();
+            if (gcd(key.determinant.mod(26).value, 26) != 1) {
+              var plntxt = "This key can not be used for decryption";
+            } else {
+              var plntxt = hill_decrypt(input.value, key);
+            }
+        }
+        output.innerHTML = plntxt;
+        output_sm.innerHTML = plntxt;
+      }
+    </script>
+    <script src="numeric.js"></script>
+    <script src="classicalciphers.js"></script>
+    <script src="./bootstrap.bundle.js"></script>
+  </body>
+</html>
