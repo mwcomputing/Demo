@@ -6,101 +6,75 @@
     <title>Classical Encryption</title>
     <link rel="stylesheet" href="./bootstrap.min.css" />
     <link rel="stylesheet" href="classicalciphers.css" />
-    <style>
-      #output,
-      #output-sm {
-        height: 100%;
-        background-image: url(./bkgd/2a552daa2d6ddf1e992e3e014af1ca0f.jpg);
-        overflow-y: scroll;
-      }
-      #inner-input {
-        height: 100%;
-        background-image: url(./bkgd/2a552daa2d6ddf1e992e3e014af1ca0f.jpg);
-      }
-      #text-area {
-        background: none;
-        border: none;
-        height: 100%;
-      }
-    </style>
+    <style></style>
   </head>
   <body>
-    <header>
-      <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Navbar</a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Dropdown
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><hr class="dropdown-divider" /></li>
-                  <li>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-              </li>
-            </ul>
-            <form class="d-flex" role="search">
-              <input
-                class="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button class="btn btn-outline-success" type="submit">
-                Search
-              </button>
-            </form>
-          </div>
+    <nav class="navbar navbar-expand-lg bg-dark" style="height: 8vh">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Dropdown
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-success" type="submit">
+              Search
+            </button>
+          </form>
         </div>
-      </nav>
-      <!-- <div class="container-fluid">
-        <div class="row bg-success p-3">
-          <div class="col">
-            <h1 class="text-center">Classical Encryption</h1>
-          </div>
-        </div>
-      </div> -->
-    </header>
+      </div>
+    </nav>
 
-    <div class="container-fluid">
-      <div
-        class="row bg-dark border-bottom border-black justify-content-center"
-      >
+    <div class="container-fluid" style="height: 92vh">
+      <div class="row border-black justify-content-center" style="height: 100%">
         <!-- Parameters -->
         <div
-          class="col-md-2 py-2 py-md-5 bg-dark border-end border-black shadow text-white"
+          class="col-md-2 pt-1 pt-md-5"
+          style="background-color: rgb(240, 240, 240)"
         >
           <div class="row">
             <div class="col-6 col-md-12">
@@ -120,67 +94,74 @@
         </div>
 
         <!-- Input -->
-        <div class="col-11 col-md-5" id="input">
-          <div id="inner-input" class="row justify-content-center py-2 py-md-0">
-            <!-- Buttons for large screen-->
-            <div class="d-none d-md-flex col-12 py-2 gap-2" style="height: 10%">
-              <button
-                type="button"
-                class="btn btn-dark d-block"
-                style="width: 50%"
-                onclick="encrypt()"
-              >
-                Encrypt
-              </button>
-              <button
-                type="button"
-                class="btn btn-dark d-block"
-                style="width: 50%"
-                onclick="decrypt()"
-              >
-                Decrypt
-              </button>
-            </div>
-            <!-- Input area -->
-            <div class="col-1 d-md-none" style="height: 250px"></div>
-            <div class="col-10 col-md-12" style="height: 85%">
+        <div class="col-12 col-md-5" id="input">
+          <!-- Buttons for large screen-->
+          <div class="d-none d-md-flex col-12 py-3 gap-3" style="height: 12%">
+            <button
+              type="button"
+              class="btn btn-dark d-block rounded-pill"
+              style="width: 100%"
+              onclick="encrypt()"
+            >
+              Encrypt
+            </button>
+            <button
+              type="button"
+              class="btn btn-dark d-block rounded-pill"
+              style="width: 100%"
+              onclick="decrypt()"
+            >
+              Decrypt
+            </button>
+          </div>
+          <!-- Input area -->
+          <div
+            id="inner-input"
+            class="row justify-content-center align-content-center py-2"
+            style="height: 85%"
+          >
+            <div class="col-1 d-md-none" style="height: 35vh"></div>
+            <div class="col-10 col-md-12" style="height: 100%">
               <textarea
                 type="text"
                 id="text-area"
                 class="form-control border border-black fw-bold"
                 placeholder="Enter the input here"
+                style="height: 100%"
               ></textarea>
             </div>
-            <div class="col-1 d-md-none" style="height: 250px"></div>
-            <!-- Buttons for small screen -->
-            <div class="d-flex d-md-none col-12 gap-2">
-              <button
-                type="button"
-                class="btn btn-dark d-block"
-                style="width: 100%"
-                onclick="encrypt()"
-              >
-                Encrypt
-              </button>
-              <button
-                type="button"
-                class="btn btn-dark d-block"
-                style="width: 100%"
-                onclick="decrypt()"
-              >
-                Decrypt
-              </button>
-            </div>
+            <div class="col-1 d-md-none" style="height: 35vh"></div>
+          </div>
+
+          <!-- Buttons for small screen -->
+          <div class="d-flex d-md-none col-12 gap-2" style="height: 12%">
+            <button
+              type="button"
+              class="btn btn-dark d-block"
+              style="width: 100%"
+              onclick="encrypt()"
+            >
+              Encrypt
+            </button>
+            <button
+              type="button"
+              class="btn btn-dark d-block"
+              style="width: 100%"
+              onclick="decrypt()"
+            >
+              Decrypt
+            </button>
           </div>
         </div>
 
         <!-- Output -->
-        <div class="col-12 col-md-5">
+        <div class="col-5 d-none d-md-flex p-2" style="height: 100%">
           <div
             id="output"
-            class="row justify-content-center d-none d-md-flex ms-4 p-2 fw-bold"
+            class="row justify-content-center fw-bold"
             style="
-              height: 600px;
+              height: 100%;
+              width: 100%;
               overflow-y: scroll;
               word-break: break-all;
               overflow-wrap: break-word;
@@ -188,13 +169,20 @@
           >
             The output will be shown here
           </div>
+        </div>
+        <div
+          class="col-12 d-md-none border-top border-black"
+          style="height: 40%"
+        >
           <div
             id="output-sm"
-            class="row justify-content-center d-md-none p-2 border-top border-black"
+            class="row justify-content-center p-2 bg-light"
             style="
-              height: 300px;
               word-break: break-all;
               overflow-wrap: break-word;
+              overflow-y: scroll;
+              height: 100%;
+              width: 100%;
             "
           >
             The output will be shown here
