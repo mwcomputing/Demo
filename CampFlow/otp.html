@@ -8,6 +8,7 @@
     <style>
       input {
         width: 40px;
+        text-align: center;
         border: none;
         background-color: transparent;
         border-bottom: 2px solid rgb(150, 150, 150);
@@ -26,7 +27,7 @@
             src="./media/Images/undraw_secure-login_m11a.png"
             class="d-block"
             alt=""
-            style="height: 200px; margin: auto"
+            style="height: 150px; margin: auto"
           />
         </div>
         <div class="col-11 col-md-4">
@@ -35,17 +36,17 @@
               Enter the OTP sent
             </h4>
             <div class="d-flex mb-3 gap-3 justify-content-center">
-              <input type="number" />
-              <input type="number" />
-              <input type="number" />
-              <input type="number" />
-              <input type="number" />
-              <input type="number" />
+              <input type="text" min="0" maxlength="1" id="otp1" />
+              <input type="text" min="0" maxlength="1" id="otp2" />
+              <input type="text" min="0" maxlength="1" id="otp3" />
+              <input type="text" min="0" maxlength="1" id="otp4" />
+              <input type="text" min="0" maxlength="1" id="otp5" />
+              <input type="text" min="0" maxlength="1" id="otp6" />
             </div>
             <div class="row justify-content-center mb-4">
-              <div class="col-5 text-muted">0:32s</div>
-              <div class="col-5 text-end">
-                <a href="#" class="text-decoration-none">resend</a>
+              <div class="col-5 text-muted" id="timer">1:00</div>
+              <div class="col-5 text-end" id="resend">
+                <span class="text-muted" style="cursor: default">resend</span>
               </div>
             </div>
             <button
@@ -64,5 +65,35 @@
       <div class="d-md-none" style="height: 200px"></div>
     </div>
     <script src="./media/JS/bootstrap.bundle.js"></script>
+    <script type="text/javascript">
+      const resend = document.getElementById("resend");
+      const timer = document.getElementById("timer");
+      time = 59;
+      const intv = setInterval(() => {
+        timer.innerHTML = time > 9 ? "0:" + time : "0:0" + time;
+        time--;
+        if (time < 0) {
+          clearInterval(intv);
+          resend.innerHTML =
+            '<span style="cursor:pointer" class="text-primary" onclick="restartTimer()" >resend</span>';
+        }
+      }, 1000);
+
+      function restartTimer() {
+        timer.innerHTML = "1:00";
+        resend.innerHTML =
+          '<span class="text-muted" style="cursor: default">resend</span>';
+        time = 59;
+        const intv = setInterval(() => {
+          timer.innerHTML = time > 9 ? "0:" + time : "0:0" + time;
+          time--;
+          if (time < 0) {
+            clearInterval(intv);
+            resend.innerHTML =
+              '<span style="cursor:pointer" class="text-primary" onclick="restartTimer()" >resend</span>';
+          }
+        }, 1000);
+      }
+    </script>
   </body>
 </html>
