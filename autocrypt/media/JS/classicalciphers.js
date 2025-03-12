@@ -411,10 +411,3 @@ function rail_decrypt(cipher_text, depth=null, key=null){
         return p_text
     }
 }
-var text = "meet me after the toga party"
-// var text = "attack postponed until two am"
-var ctxt = rail_encrypt(text, null, [4,3,1,2,5,6,7])
-// ctxt2 = rail_encrypt(ctxt, null, [4,3,1,2,5,6,7])
-// document.write(ctxt, "<br>")
-ptxt = rail_decrypt(ctxt, null, [4,3,1,2,5,6,7])
-document.write(ptxt)
